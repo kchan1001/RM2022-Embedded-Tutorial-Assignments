@@ -33,5 +33,21 @@ int main()
 bool arrayReverse(char* array, int start, int end) {
     // return false if the start is larger than end
     // otherwise reverse the array
+    if (start > end)
+        return false;
+    bool marker[end-start+1] = {};
+    for (int i = 0; i <= end-start; i++) {
+        marker[i] = true;
+    }
+    for (int i = start; i <= end; i++) {
+        if (marker[i-start] && marker[end-start-i]) {
+            char x = array[i];
+            array [i] = array [end-i];
+            array [end-i] = x;
+            marker[i-start] = false;
+            marker[end-start-i] = false;
+        }
+    }
+    return array;
     return false;
 }
